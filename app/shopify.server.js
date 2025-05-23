@@ -23,6 +23,43 @@ const shopify = shopifyApp({
   ...(process.env.SHOP_CUSTOM_DOMAIN
     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),
+  hooks: {
+    afterAuth: async ({ session }) => {
+      // Set the app URL metafield after authentication
+      const client = new shopify.clients.Graphql({ session });
+      await client.query({
+        data: {
+          query: `
+            mutation appMetafieldsSet($metafields: [MetafieldsSetInput!]!) {
+              metafieldsSet(metafields: $metafields) {
+                metafields {
+                  key
+                  namespace
+                  value
+                }
+                userErrors {
+                  field
+                  message
+                  code
+                }
+              }
+            }
+          `,
+          variables: {
+            metafields: [
+              {
+                namespace: "shopify_app",
+                key: "app_url",
+                value: process.env.SHOPIFY_APP_URL || "",
+                type: "single_line_text_field",
+                ownerId: `gid://shopify/Shop/${session.shop}`
+              }
+            ]
+          }
+        }
+      });
+    }
+  }
 });
 
 export default shopify;

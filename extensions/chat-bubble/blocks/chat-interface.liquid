@@ -33,10 +33,11 @@
 <script src="{{ 'chat.js' | asset_url }}" defer></script>
 <script>
   window.shopChatConfig = {
-    promptType: {{ block.settings.system_prompt | json }},
-    welcomeMessage: {{ block.settings.welcome_message | json }}
+    promptType: "{{ block.settings.prompt_type }}",
+    welcomeMessage: "{{ block.settings.welcome_message }}",
+    appUrl: "{{ shop.metafields.shopify_app.app_url }}"
   };
-  window.shopId = {{ shop.id }};
+  window.shopId = "{{ shop.id }}";
 </script>
 
 {% schema %}

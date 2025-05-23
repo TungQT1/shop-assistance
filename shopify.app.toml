@@ -1,26 +1,75 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "b45c2aafb2d9218bbc86fb5cdb97a13a"
-name = "shop-chat-agent-v3"
+name = "shop-chat-agent"
+client_id = "400bcaa5ee4b55946864413ec4740515"
 handle = "shop-chat-agent-v3-1"
-application_url = "https://localhost:3458"
+application_url = "${SHOPIFY_APP_URL}"
 embedded = true
 
 [build]
 include_config_on_deploy = true
 
 [webhooks]
-api_version = "2025-04"
+api_version = "2024-01"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "customer_read_customers,customer_read_orders,customer_read_store_credit_account_transactions,customer_read_store_credit_accounts,unauthenticated_read_product_listings"
+# Read and write products, variants and collections
+write_products
+# Read and write customers
+write_customers
+# Read and write orders
+write_orders
+# Read and write script tags
+write_script_tags
+# Read and write price rules
+write_price_rules
+# Read and write discount codes
+write_discounts
+# Read and write marketing events
+write_marketing_events
+# Read and write resource feedback
+write_resource_feedbacks
+# Read and write metafields
+write_metafields
+# Read and write themes
+write_themes
+# Read and write content
+write_content
+# Read and write online store pages
+write_online_store_pages
+# Read and write online store articles
+write_online_store_articles
+# Read and write online store blogs
+write_online_store_blogs
+# Read and write online store navigation
+write_online_store_navigation
+# Read and write online store redirects
+write_online_store_redirects
+# Read and write online store script tags
+write_online_store_script_tags
+# Read and write online store themes
+write_online_store_themes
+# Read and write online store pages
+write_online_store_pages
+# Read and write online store articles
+write_online_store_articles
+# Read and write online store blogs
+write_online_store_blogs
+# Read and write online store navigation
+write_online_store_navigation
+# Read and write online store redirects
+write_online_store_redirects
+# Read and write online store script tags
+write_online_store_script_tags
+# Read and write online store themes
+write_online_store_themes
 
 [auth]
 redirect_urls = [
-  "https://localhost:3458/auth/callback",
-  "https://localhost:3458/auth/shopify/callback",
-  "https://localhost:3458/api/auth/callback"
+  "${SHOPIFY_APP_URL}/auth/callback",
+  "${SHOPIFY_APP_URL}/auth/shopify/callback",
+  "${SHOPIFY_APP_URL}/api/auth/callback"
 ]
 
 [pos]
